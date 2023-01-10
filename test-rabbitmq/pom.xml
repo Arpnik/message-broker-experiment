@@ -1,0 +1,167 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.example</groupId>
+  <artifactId>test-rabbitmq</artifactId>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>test-rabbitmq Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+    <rabbitmq.version>5.16.0</rabbitmq.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>1.8</java.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <jacoco.version>0.7.7.201606060606</jacoco.version>
+    <surefire.version>2.19.1</surefire.version>
+
+    <!-- Other dependencies -->
+    <jackson.version>2.8.1</jackson.version>
+    <hibernate.version>5.2.4.Final</hibernate.version>
+    <jackson.version>2.8.1</jackson.version>
+    <log4j.version>1.2.17</log4j.version>
+    <slf4j.version>1.7.20</slf4j.version>
+    <javax.el.api>2.2.4</javax.el.api>
+    <mysql.version>5.1.38</mysql.version>
+    <lombok.version>1.16.10</lombok.version>
+
+    <!-- Spring dependencies -->
+    <spring.version>4.3.6.RELEASE</spring.version>
+    <spring.security.version>4.2.2.RELEASE</spring.security.version>
+    <spring-data-jpa.version>1.11.7.RELEASE</spring-data-jpa.version>
+    <swagger.version>2.4.0</swagger.version>
+
+    <!-- Test and Provided dependencies -->
+    <junit.version>4.12</junit.version>
+    <h2.db.version>1.4.191</h2.db.version>
+    <javax.servlet.api>3.1.0</javax.servlet.api>
+
+    <jetty.version>9.3.7.v20160115</jetty.version>
+    <jetty.http.port>9004</jetty.http.port>
+    <jetty.http.host>0.0.0.0</jetty.http.host>
+    <jetty.context>/experiment</jetty.context>
+
+  </properties>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>com.rabbitmq</groupId>
+      <artifactId>amqp-client</artifactId>
+      <version>${rabbitmq.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${lombok.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+
+    <!-- SPRING -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-taglibs</artifactId>
+      <version>${spring.security.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-config</artifactId>
+      <version>${spring.security.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-web</artifactId>
+      <version>${spring.security.version}</version>
+    </dependency>
+
+    <!-- Using Swagger for REST API documentation -->
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger2</artifactId>
+      <version>${swagger.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger-ui</artifactId>
+      <version>${swagger.version}</version>
+    </dependency>
+
+    <!-- Provided -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>${javax.servlet.api}</version>
+      <scope>provided</scope>
+    </dependency>
+
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <finalName>test-rabbitmq</finalName>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>${jetty.version}</version>
+        <configuration>
+          <scanIntervalSeconds>5</scanIntervalSeconds>
+          <useTestClasspath>false</useTestClasspath>
+          <httpConnector>
+            <port>${jetty.http.port}</port>
+          </httpConnector>
+          <webApp>
+            <contextPath>${jetty.context}</contextPath>
+          </webApp>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.2.2</version>
+        <configuration>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
+</project>
