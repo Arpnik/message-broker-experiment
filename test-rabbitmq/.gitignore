@@ -14,8 +14,6 @@
 .mtj.tmp/
 .idea/*
 *.iml
-champ-server/assure-champ.properties
-champ-server/champ-2
 target/
 # Package Files #
 *.jar
